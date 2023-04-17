@@ -90,7 +90,7 @@ export const AuthContextProvider = ({
 				name: name,
 				email: newUser.email,
 			});
-
+			
 
 			await axios.post(
 				"http://localhost:3001/user/create",

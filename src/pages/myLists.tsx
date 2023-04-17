@@ -131,7 +131,7 @@ const MyLists = () => {
 					</form>
 				</FormProvider>
 				<div className="w-full max-w-[1280px] flex justify-start items-center text-light text-3xl font-medium py-3 border-b border-light">
-					Meals
+					Orders
 				</div>
 				<div className="hidden md:grid w-full max-w-[1280px] xl:grid-cols-3 md:grid-cols-2 grid-flow-row gap-3 my-4">
 					<MenuWidget
