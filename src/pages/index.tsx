@@ -1,5 +1,6 @@
 import { useAuth } from "@/context/AuthContext";
 import { Inter } from "@next/font/google";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -16,30 +17,30 @@ export default function Home() {
 				</button>
 				{user ? (
 					<div className="flex flex-row justify-center items-center gap-3">
-						<button
-							onClick={() => router.push("/myLists")}
+						<Link
+							href={`/myLists/${user.uid}`}
 							className="p-3 text-light bg-dark"
 						>
 							My lists
-						</button>
-						<button onClick={() => router.push("/profile")} className="p-3 text-light bg-dark">
+						</Link>
+						<Link href={"/profile"} className="p-3 text-light bg-dark">
 							Profile
-						</button>
+						</Link>
 					</div>
 				) : (
 					<div className="flex flex-row justify-center items-center gap-3">
-						<button
-							onClick={() => router.push("/signUp")}
+						<Link
+							href={"/signUp"}
 							className="p-3 text-light bg-dark"
 						>
 							Sign up
-						</button>
-						<button
-							onClick={() => router.push("/login")}
+						</Link>
+						<Link
+							href={"/login"}
 							className="p-3 text-light bg-dark"
 						>
 							Log in
-						</button>
+						</Link>
 					</div>
 				)}
 			</div>

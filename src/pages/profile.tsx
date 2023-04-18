@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { doc, onSnapshot, updateDoc } from "firebase/firestore";
+import Link from "next/link";
 
 interface ProfileChangeForm {
 	name: string;
@@ -43,6 +44,15 @@ const Profile = () => {
 
 	const nameWatch = watch("name", profileData?.name);
 
+	const handleLogout = async () => {
+		try {
+			await logOut();
+			console.log("user logged out");
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	const submitForm = async (data: ProfileChangeForm) => {
 		setLoading(true);
 		console.log(data);
@@ -70,27 +80,25 @@ const Profile = () => {
 	return (
 		<>
 			<div className="w-full flex flex-row justify-center gap-3 items-center p-3">
-				<button
-					type="button"
-					onClick={() => router.push("/")}
+				<Link
+					href={'/'}
 					className="p-3 text-light bg-dark"
 				>
 					Home
-				</button>
+				</Link>
 				<div className="flex flex-row justify-center items-center gap-3">
-					<button
-						type="button"
-						onClick={() => router.push("/myLists")}
+					<Link
+						href={`/myLists/${user?.uid}`}
 						className="p-3 text-light bg-dark"
 					>
 						My lists
-					</button>
-					<button
+					</Link>
+					{/* <button
 						type="button"
 						className="p-3 text-light bg-dark border-b border-light"
 					>
 						Profile
-					</button>
+					</button> */}
 				</div>
 			</div>
 			<div className="w-full flex flex-row justify-center items-center mt-20">
@@ -133,7 +141,7 @@ const Profile = () => {
 
                             <button
 								type="button"
-                                
+                                onClick={handleLogout}
 								className=" text-red-500 border border-red-500 p-3 w-full rounded-lg hover:bg-red-500 hover:text-light"
 							>
 								Log out

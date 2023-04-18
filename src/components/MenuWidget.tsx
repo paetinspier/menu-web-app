@@ -1,42 +1,55 @@
+import { User } from "@/models/user";
+import { Conversation } from "@/pages/myLists/[userUid]";
 import React from "react";
 
-interface MenuListProps {
+export interface Message {
+	content: string;
+	createdAt: string;
+	conversation: MenuList;
+	sender: User;
+}
+export interface MenuList {
 	title: string;
 	date: string;
 	users: string[];
 	mealType: number;
 	orders_complete: boolean;
+	messages: Message[]
 }
 
-const MenuWidget: React.FC<MenuListProps> = (props: MenuListProps) => {
+interface MenuWidgetProps {
+	data: Conversation;
+}
+
+const MenuWidget = (props: MenuWidgetProps) => {
 	return (
 		<>
 			<div className="w-full flex flex-row justify-end items-center rounded-lg bg-emerald-900">
 
 				<div className="w-full duration-300 hover:w-11/12 h-[200px] bg-light rounded-lg p-4 flex flex-col items-center justify-center gap-4">
 					<div className="w-full text-dark text-2xl font-medium flex justify-start items-center whitespace-nowrap overflow-hidden">
-						{props.title}
+						{props.data.name}
 					</div>
 					<div className="w-full text-dark text-xl font-light flex justify-between items-center">
-						{props.date}
-                        {props.orders_complete ? (
+						{props.data.createdAt}
+                        {/* {props.data. ? (
 							<FinishedChip />
 						) : (
 							<WaitingChip />
-						)}
+						)} */}
 					</div>
 					<div className="w-full flex flex-row overflow-hidden justify-start items-center text-dark text-xl font-light">
-						{props.users.map((user, index) => {
+						{props.data.members?.map((user, index) => {
 							if (index == 0) {
 								return (
-									<div className="text-dark text-xl">
-										{user}
+									<div key={user.id} className="text-dark text-xl">
+										{user.user.name}
 									</div>
 								);
 							} else {
 								return (
-									<div className="text-dark text-xl">
-										, {user}
+									<div key={user.id} className="text-dark text-xl">
+										, {user.user.name}
 									</div>
 								);
 							}

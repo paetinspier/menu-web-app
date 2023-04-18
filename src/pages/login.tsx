@@ -1,4 +1,5 @@
 import { useAuth } from "@/context/AuthContext";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -38,21 +39,21 @@ const LoginPage = () => {
 	return (
 		<>
 			<div className="w-full flex flex-row justify-center gap-3 items-center p-3">
-				<button
-					onClick={() => router.push("/")}
+				<Link
+					href={'/'}
 					className="p-3 text-light bg-dark"
 				>
 					Home
-				</button>
-				<button
-					onClick={() => router.push("/signUp")}
+				</Link>
+				<Link
+					href={"/signUp"}
 					className="p-3 text-light bg-dark "
 				>
 					Sign up
-				</button>
-				<button className="p-3 text-light bg-dark border-b border-light">
+				</Link>
+				{/* <button className="p-3 text-light bg-dark border-b border-light">
 					Log in
-				</button>
+				</button> */}
 			</div>
 			<FormProvider {...methods}>
 				<form onSubmit={handleSubmit(onSubmit)}>
